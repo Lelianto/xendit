@@ -31,7 +31,7 @@ class SignIn extends React.Component {
       store.setState({
         typeText:"password"
       })
-      await this.props.history.push(`/${localStorage.getItem('userAuth')}`);
+      await this.props.history.push(`/homepage/${localStorage.getItem('userAuth')}`);
     } else {
       return <Redirect to={{ pathname: "/login" }} />;
     }
@@ -39,7 +39,7 @@ class SignIn extends React.Component {
 
   render() { 
     if(this.props.token) {
-      return <Redirect to={{ pathname: `/${this.props.token}` }} />
+      return <Redirect to={{ pathname: `/homepage/${this.props.token}` }} />
     }
     return (
       <div className="wrapper fadeInDown">

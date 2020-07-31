@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import '../styles/css/main.css'
 import '../styles/css/bootstrap.min.css';
+import { withRouter } from 'react-router-dom'
+import { connect } from 'unistore/react'
+import { actions } from '../store'
 
 class Upperheader extends Component {
 	constructor(props) {
@@ -9,7 +12,7 @@ class Upperheader extends Component {
 			selected:true,
 			scrolled:false,
 			listEmail: [],
-			email: []
+			email: ''
 		};
 		this.handleScroll=this.handleScroll.bind(this)
 	}
@@ -42,7 +45,7 @@ class Upperheader extends Component {
 		this.setState({
 			listEmail: data
 		})
-		console.log(this.state.listEmail)
+		this.props.postMail(this.state.email)
 	}
 
 	render() {
@@ -88,4 +91,4 @@ class Upperheader extends Component {
 	} 
 }
 
-export default Upperheader;
+export default connect("",actions)(withRouter(Upperheader));

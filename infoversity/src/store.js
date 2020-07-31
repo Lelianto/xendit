@@ -5,8 +5,10 @@ import firebaseDb from './firebase';
 
 const initialState = { 
 	endpoint: 'http://universities.hipolabs.com',
+	endpointCountry: 'https://restcountries.eu/rest/v2/name/',
 	infoData: [],
 	email: '',
+	countries: [],
 	password: '',
 	typeText: 'password',
 	dataUser: {},
@@ -14,13 +16,22 @@ const initialState = {
 	token:'',
 	count:0,
 	userData: {},
-	successRegitration: false
+	successRegitration: false,
+	loading: true
 }
 
 export const store = createStore(initialState)
 
 export const actions = store => ({
-	checkUserData: async (state, userId) => {
+	checkUserData: async (state, lengthData, dataId) => {
+		let userId = dataId
+		if (lengthData===0) {
+			if(localStorage.getItem('userAuth')) {
+				userId = localStorage.getItem('userAuth')
+			} else if (store.getState().token) {
+				userId = store.getState().token
+			}
+		} 
 		firebaseDb.child('users').on('value', snapshot=>{
 			if(snapshot.val()!==null) {
 				store.setState({
@@ -53,19 +64,51 @@ export const actions = store => ({
 			token: ''
 		})
 	},
-	getUniversity : async (state, variable) => {
-		let city = ''
-		let randomCity = ['Jakarta','Bandung','London','Manchester','Tokyo','Seoul']
-		let index = Math.floor(Math.random()*randomCity.length)
+	getRecommendation : async (state, variable) => {
+		const req = {
+			method: "get",
+			url: state.endpointCountry+ variable,
+			headers: {
+				"Content-Type": "application/json"
+			}
+		};
+		await axios(req)
+			.then(response => {
+				let listCountry = []
+				if (response.status===200) {
+					response.data.forEach((item, index)=>{
+						listCountry.push(item.name)
+					})
+				}
+				store.setState({
+					countries: listCountry
+				})
+			})
+			.catch(error => {
+				return false
+		})
+	},
+	getUniversity : async (state, variable, additional) => {
+		store.setState({
+			loading: true
+		})
+		let randomName = ['Jakarta','Bandung','London','Manchester','Tokyo','Seoul']
+		let index = Math.floor(Math.random()*randomName.length)
+		let name = ''
+		let country = ''
 		if(variable) {
-			city = variable
+			if(additional==='name') {
+				name = variable
+			} else {
+				country = variable
+			}
 		} else {
-			city = randomCity[index]
-			index = Math.floor(Math.random()*randomCity.length)
+			name = randomName[index]
+			index = Math.floor(Math.random()*randomName.length)
 		}
 		const req = {
 			method: "get",
-			url: state.endpoint+"/search?name="+ city,
+			url: state.endpoint+"/search?name="+ name+'&country='+country,
 			headers: {
 				"Content-Type": "application/json"
 			}
@@ -74,7 +117,8 @@ export const actions = store => ({
 			.then(response => {
 				if (response.status===200) {
 					store.setState({
-						infoData: response.data
+						infoData: response.data,
+						loading: false
 					})
 				}
 			})
@@ -112,8 +156,11 @@ export const actions = store => ({
 						dataUser: snapshot.val()
 					})
 					let result = snapshot.val()
+					let wrongData = true
 					Object.keys(result).map((id)=>{
 						if(email===result[id].email&&password===result[id].password) {
+							wrongData = false
+							swal("Selamat!", "Anda berhasil login!", "success");
 							store.setState({
 								token: id,
 								userData: result[id]
@@ -121,9 +168,28 @@ export const actions = store => ({
 							localStorage.setItem('userAuth', id)
 						}
 					})
+					if (wrongData) {
+						swal("Gagal", "Silakan cek kembali email dan password Anda", "error");
+					}
 				}
 			})
 		}
+	},
+
+	postMail : async (state, email) => {
+		let obj = {
+			email : email
+		}
+		firebaseDb.child('email_list').push(
+			obj,
+			err => {
+				if(err) {
+					swal("Gagal", "Terjadi kesalahan, muat ulang browser Anda", "error");
+				} else {
+					swal("Selamat!", "Anda berhasil berlangganan!", "success");
+				}
+			}
+		)
 	},
 
 	favoriteUniversities : async (state, userId, univId) => {
@@ -160,9 +226,7 @@ export const actions = store => ({
 			obj,
 			err => {
 				if(err) {
-					console.log('error',err)
 				} else {
-					console.log('sukses', obj)
 					firebaseDb.child('users').on('value', snapshot=>{
 						if(snapshot.val()!==null) {
 							store.setState({
@@ -220,7 +284,6 @@ export const actions = store => ({
 							obj,
 							err => {
 								if(err) {
-									console.log('masuk error', err)
 									swal("Gagal", "Terjadi kesalahan, muat ulang browser Anda", "error");
 								} else {
 									swal("Selamat!", "Anda berhasil terdaftar!", "success");
@@ -236,7 +299,6 @@ export const actions = store => ({
 						obj,
 						err => {
 							if(err) {
-								console.log('masuk error', err)
 								swal("Gagal", "Terjadi kesalahan, muat ulang browser Anda", "error");
 							} else {
 								swal("Selamat!", "Anda berhasil terdaftar!", "success");
