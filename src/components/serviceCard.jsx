@@ -41,6 +41,7 @@ class Bottomheader extends Component {
 			if(Array.isArray(user[id])) {
 				listFavorite = user[id]
 			}
+			return id
 		})
 		let loading = ['1','2','3','4','5','6']
 		if (data.length===0||Object.keys(user).length===0) {

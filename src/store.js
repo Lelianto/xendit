@@ -48,12 +48,14 @@ export const actions = store => ({
 						})
 						localStorage.setItem('userAuth', id)
 					}
+					return id
 				})
 				if(count===0) {
 					localStorage.removeItem('userAuth')
 					store.setState({
 						token: ''
 					})
+					return false
 				}
 			}
 		})
@@ -167,6 +169,7 @@ export const actions = store => ({
 							})
 							localStorage.setItem('userAuth', id)
 						}
+						return id
 					})
 					if (wrongData) {
 						swal("Gagal", "Silakan cek kembali email dan password Anda", "error");
@@ -209,6 +212,7 @@ export const actions = store => ({
 					} else {
 						same=1
 					}
+					return same
 				})
 				if(same===0) {
 					newFavorite.push(univId)
@@ -240,6 +244,7 @@ export const actions = store => ({
 										userData: result[id]
 									})
 								}
+								return id
 							})
 						}
 					})
@@ -275,6 +280,7 @@ export const actions = store => ({
 							swal("Gagal", "Email ini telah terdaftar", "error");
 						}
 						hasChecked = true
+						return id
 					})
 					if(notInDatabase&&hasChecked&&store.getState().count===0) {
 						store.setState({
