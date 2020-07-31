@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import firebaseDb from './firebase';
 
 const initialState = { 
-	endpoint: 'http://universities.hipolabs.com',
+	endpoint: 'https://cors-anywhere.herokuapp.com/http://universities.hipolabs.com',
 	endpointCountry: 'https://restcountries.eu/rest/v2/name/',
 	infoData: [],
 	email: '',
@@ -112,7 +112,8 @@ export const actions = store => ({
 			method: "get",
 			url: state.endpoint+"/search?name="+ name+'&country='+country,
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest"
 			}
 		};
 		await axios(req)
