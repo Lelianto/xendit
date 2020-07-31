@@ -27,18 +27,26 @@ class SignUp extends React.Component {
   */
   doRegister = async () => {
 		await this.props.postRegister()
-    if (localStorage.getItem('success')){
+    if (this.props.successRegitration){
       store.setState({
         typeText:"password"
 			})
-			localStorage.removeItem('success')
+			store.setState({
+				successRegitration: false
+			})
       this.props.history.push("/login");
     } else {
       return <Redirect to={{ pathname: "/register" }} />;
     }
-  }
+	}
 
   render() { 
+		if(this.props.successRegitration) {
+			store.setState({
+				successRegitration: false
+			})
+			return <Redirect to={{ pathname: "/login" }} />;
+		}
     return (
       <div className="wrapper fadeInDown">
         <div id="formContent">
@@ -92,4 +100,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default connect("typeText, email, password",actions)(withRouter(SignUp));
+export default connect("typeText, successRegitration, email, password",actions)(withRouter(SignUp));
