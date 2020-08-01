@@ -30,8 +30,8 @@ class Dropdown extends Component {
 			<React.Fragment>
 				<div className='container-fluid dropdown-upper'>
 					<div className='row'>
-						<div class="md-form">
-							<input class="form-control" type="text" onChange={(e)=>this.searchHandle(e)} placeholder="Search by Country" aria-label="Search"/>
+						<div className="md-form">
+							<input className="form-control" type="text" onChange={(e)=>this.searchHandle(e)} placeholder="Search by Country" aria-label="Search"/>
 						</div>
 					</div>
 					{

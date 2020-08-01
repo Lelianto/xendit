@@ -81,7 +81,7 @@ class Upperheader extends Component {
 				<div className="container-fluid head-upper">
 					<div className='row'>
 						<div className='col-lg-12 pad-zero'>
-							<nav class="navbar navbar-expand-lg navbar-light bg-blue row">
+							<nav className="navbar navbar-expand-lg navbar-light bg-blue row">
 								<div className='col-lg-3 col-md-9 col-sm-9 col-9 text-left pb-15'>
 									<Link className="navbar-brand brand-name" to={location=>`${uniquePath}`}>
 										<span className='bold-white font-size-24'>
@@ -93,31 +93,31 @@ class Upperheader extends Component {
 									</Link>
 								</div>
 								<div className='col-lg-1 col-md-3 col-sm-3 col-3 pb-15'>
-									<button class="navbar-toggler distance" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-										<span class="navbar-toggler-icon"></span>
+									<button className="navbar-toggler distance" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+										<span className="navbar-toggler-icon"></span>
 									</button>
 								</div>
 								<div className='col-lg-8'>
-									<div class="collapse navbar-collapse" id="navbarSupportedContent">
-											<div class="md-form">
-												<input class="form-control" type="text" onChange={(e)=>this.searchHandle(e)} onKeyDown={this.handleKeyDown} placeholder="Search by Name" aria-label="Search"/>
+									<div className="collapse navbar-collapse" id="navbarSupportedContent">
+											<div className="md-form">
+												<input className="form-control" type="text" onChange={(e)=>this.searchHandle(e)} onKeyDown={this.handleKeyDown} placeholder="Search by Name" aria-label="Search"/>
 											</div>
-										<ul class="navbar-nav mr-auto nav-style ">
-											<li class="nav-item active distance">
-												<Link class="nav-link main-menu" to={location=>`${listUnivPath}`}>List University <span class="sr-only">Projects</span></Link>
+										<ul className="navbar-nav mr-auto nav-style ">
+											<li className="nav-item active distance">
+												<Link className="nav-link main-menu" to={location=>`${listUnivPath}`}>List University <span className="sr-only">Projects</span></Link>
 											</li>
 											{
 												this.props.match.params.id?
-												<li class="nav-item distance">
-													<Link onClick={()=>this.handleLogout()} to='/' class="nav-link main-menu">Logout</Link>
+												<li className="nav-item distance">
+													<Link onClick={()=>this.handleLogout()} to='/' className="nav-link main-menu">Logout</Link>
 												</li>
 												:
 												<React.Fragment>
-													<li class="nav-item distance">
-														<Link class="nav-link main-menu" to="/register">Register</Link>
+													<li className="nav-item distance">
+														<Link className="nav-link main-menu" to="/register">Register</Link>
 													</li>
-													<li class="nav-item distance">
-														<Link class="nav-link main-menu" to="/login">Login</Link>
+													<li className="nav-item distance">
+														<Link className="nav-link main-menu" to="/login">Login</Link>
 													</li>
 												</React.Fragment>
 											}

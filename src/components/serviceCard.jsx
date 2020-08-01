@@ -128,7 +128,7 @@ class Bottomheader extends Component {
 														<span></span>
 														:
 														<span style={{fontSize:'24px'}}>
-															<i id={index} onClick={()=>this.doFavorite(item.name)} class="far fa-heart"></i>
+															<i id={index} onClick={()=>this.doFavorite(item.name)} className="far fa-heart"></i>
 														</span>
 													}
 												</div>
@@ -137,11 +137,11 @@ class Bottomheader extends Component {
 													{
 														listFavorite.includes(item.name)?
 														<span style={{fontSize:'24px',color:'red'}}>
-															<i id={index} onClick={()=>this.doFavorite(item.name)} class="fas fa-heart"></i>
+															<i id={index} onClick={()=>this.doFavorite(item.name)} className="fas fa-heart"></i>
 														</span>
 														:
 														<span style={{fontSize:'24px'}}>
-															<i id={index} onClick={()=>this.doFavorite(item.name)} class="far fa-heart"></i>
+															<i id={index} onClick={()=>this.doFavorite(item.name)} className="far fa-heart"></i>
 														</span>
 													}
 												</div>
@@ -252,7 +252,7 @@ class Bottomheader extends Component {
 												<span></span>
 												:
 												<span style={{fontSize:'24px'}}>
-													<i id={index} onClick={()=>this.doFavorite(item.name)} class="far fa-heart"></i>
+													<i id={index} onClick={()=>this.doFavorite(item.name)} className="far fa-heart"></i>
 												</span>
 											}
 										</div>
@@ -261,11 +261,11 @@ class Bottomheader extends Component {
 											{
 												listFavorite.includes(item.name)?
 												<span style={{fontSize:'24px',color:'red'}}>
-													<i id={index} onClick={()=>this.doFavorite(item.name)} class="fas fa-heart"></i>
+													<i id={index} onClick={()=>this.doFavorite(item.name)} className="fas fa-heart"></i>
 												</span>
 												:
 												<span style={{fontSize:'24px'}}>
-													<i id={index} onClick={()=>this.doFavorite(item.name)} class="far fa-heart"></i>
+													<i id={index} onClick={()=>this.doFavorite(item.name)} className="far fa-heart"></i>
 												</span>
 											}
 										</div>
