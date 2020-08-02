@@ -163,7 +163,9 @@ export const actions = store => ({
 					Object.keys(result).map((id)=>{
 						if(email===result[id].email&&password===result[id].password) {
 							wrongData = false
-							swal("Selamat!", "Anda berhasil login!", "success");
+							if (store.getState().token==='') {
+								swal("Selamat!", "Anda berhasil login!", "success");
+							}
 							store.setState({
 								token: id,
 								userData: result[id]

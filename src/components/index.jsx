@@ -99,29 +99,54 @@ class Upperheader extends Component {
 								</div>
 								<div className='col-lg-8'>
 									<div className="collapse navbar-collapse" id="navbarSupportedContent">
-											<div className="md-form">
-												<input className="form-control" type="text" onChange={(e)=>this.searchHandle(e)} onKeyDown={this.handleKeyDown} placeholder="Search by Name" aria-label="Search"/>
-											</div>
-										<ul className="navbar-nav mr-auto nav-style ">
-											<li className="nav-item active distance">
-												<Link className="nav-link main-menu" to={location=>`${listUnivPath}`}>List University <span className="sr-only">Projects</span></Link>
-											</li>
-											{
-												this.props.match.params.id?
-												<li className="nav-item distance">
-													<Link onClick={()=>this.handleLogout()} to='/' className="nav-link main-menu">Logout</Link>
+										<div className="md-form">
+											<input className="form-control" type="text" onChange={(e)=>this.searchHandle(e)} onKeyDown={this.handleKeyDown} placeholder="Search by Name" aria-label="Search"/>
+										</div>
+										{
+											this.props.match.path==='/search/:id' ?
+												<ul className="navbar-nav mr-auto nav-style ">
+													<li className="nav-item active distance">
+														<Link className="nav-link main-menu" to={location=>`${listUnivPath}`}>List University <span className="sr-only">Projects</span></Link>
+													</li>
+													{
+														JSON.parse(this.props.match.params.id).user?
+														<li className="nav-item distance">
+															<Link onClick={()=>this.handleLogout()} to='/' className="nav-link main-menu">Logout</Link>
+														</li>
+														:
+														<React.Fragment>
+															<li className="nav-item distance">
+																<Link className="nav-link main-menu" to="/register">Register</Link>
+															</li>
+															<li className="nav-item distance">
+																<Link className="nav-link main-menu" to="/login">Login</Link>
+															</li>
+														</React.Fragment>
+													}
+												</ul>
+											:
+											<ul className="navbar-nav mr-auto nav-style ">
+												<li className="nav-item active distance">
+													<Link className="nav-link main-menu" to={location=>`${listUnivPath}`}>List University <span className="sr-only">Projects</span></Link>
 												</li>
-												:
-												<React.Fragment>
+												{
+													(this.props.match.params.id)?
 													<li className="nav-item distance">
-														<Link className="nav-link main-menu" to="/register">Register</Link>
+														<Link onClick={()=>this.handleLogout()} to='/' className="nav-link main-menu">Logout</Link>
 													</li>
-													<li className="nav-item distance">
-														<Link className="nav-link main-menu" to="/login">Login</Link>
-													</li>
-												</React.Fragment>
-											}
-										</ul>
+													:
+													<React.Fragment>
+														<li className="nav-item distance">
+															<Link className="nav-link main-menu" to="/register">Register</Link>
+														</li>
+														<li className="nav-item distance">
+															<Link className="nav-link main-menu" to="/login">Login</Link>
+														</li>
+													</React.Fragment>
+												}
+											</ul>
+
+										}
 									</div>
 								</div>
 							</nav>
