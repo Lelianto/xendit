@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import '../styles/css/main.css'
-import '../styles/css/bootstrap.min.css';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'unistore/react'
-import { store, actions } from '../store'
+import { store, actions } from '../../store'
 
 class Bottomheader extends Component {
 	componentDidMount() {

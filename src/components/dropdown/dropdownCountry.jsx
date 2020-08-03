@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'unistore/react';
-import { actions } from '../store';
-import '../styles/css/main.css'
-import '../styles/css/bootstrap.min.css';
+import { actions } from '../../store';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
 
 class Dropdown extends Component {
 	constructor(props) {

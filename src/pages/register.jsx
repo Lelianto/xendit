@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Register from '../components/register';
+import Register from '../components/register/register';
 import '../styles/css/index.css';
 
 class RegisterPage extends Component {

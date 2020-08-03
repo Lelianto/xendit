@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import '../styles/css/main.css'
-import '../styles/css/bootstrap.min.css';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'unistore/react'
-import { actions } from '../store'
+import { actions } from '../../store'
 
 class Upperheader extends Component {
 	constructor(props) {

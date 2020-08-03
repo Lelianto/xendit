@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../styles/css/main.css';
-import Upperheader from '../components/index';
-import Bottomheader from '../components/mainPhoto';
-import ServiceCard from '../components/serviceCard';
-import Footer from '../components/footer';
-import PopupMail from '../components/popUpMail'
+import Upperheader from '../components/header/index';
+import Bottomheader from '../components/slider/mainPhoto';
+import ServiceCard from '../components/card/serviceCard';
+import Footer from '../components/footer/footer';
+import PopupMail from '../components/newsletter/popUpMail'
 
 class Homepage extends Component {
 	render() {

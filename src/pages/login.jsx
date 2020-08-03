@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Login from '../components/login';
+import Login from '../components/login/login';
 import '../styles/css/index.css';
 
 class LoginPage extends Component {

@@ -1,11 +1,11 @@
 import React from 'react';
-import '../styles/css/main.css'
-import '../styles/css/bootstrap.min.css';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
 
 const Footer = () => {
 	return (
 		<React.Fragment>
-			<div className='container-fluid footer-background'>
+			<div className='container-fluid footer-background' data-test='footer-test'>
 				<div className='row'>
 					<div className='col-lg-12 text-center'>
 						<i className='fa fa-copyright'></i> 2020&nbsp;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import '../styles/css/main.css'
-import '../styles/css/bootstrap.min.css';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'unistore/react'
-import { store, actions } from '../store'
+import { store, actions } from '../../store'
 
 class Upperheader extends Component {
 	constructor(props) {
@@ -78,7 +78,7 @@ class Upperheader extends Component {
 		}
 		return (
 			<React.Fragment>
-				<div className="container-fluid head-upper">
+				<div className="container-fluid head-upper" data-test='tested-component-1'>
 					<div className='row'>
 						<div className='col-lg-12 pad-zero'>
 							<nav className="navbar navbar-expand-lg navbar-light bg-blue row">

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../styles/css/main.css';
-import Upperheader from '../components/index';
-import Dropdown from '../components/dropdownCountry';
-import Footer from '../components/footer';
-import ServiceCard from '../components/serviceCard';
+import Upperheader from '../components/header/index';
+import Dropdown from '../components/dropdown/dropdownCountry';
+import Footer from '../components//footer/footer';
+import ServiceCard from '../components/card/serviceCard';
 
 class ListUniversities extends Component {
 	render() {

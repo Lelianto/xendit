@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import '../styles/css/main.css'
-import '../styles/css/bootstrap.min.css';
-import backgroundPhoto from '../assets/images/university.jpg';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
+import backgroundPhoto from '../../assets/images/university.jpg';
 
 class Bottomheader extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div className='container-fluid'>
+				<div className='container-fluid' data-test='mainphoto-test'>
 					<div className='row main-frame'>
 					</div>
 					<div className='row main-word'>

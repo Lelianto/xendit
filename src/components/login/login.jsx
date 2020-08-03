@@ -1,10 +1,10 @@
 import React from 'react';
-import '../styles/css/index.css';
-import '../styles/css/main.css';
-import '../styles/css/bootstrap.min.css'
+import '../../styles/css/index.css';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
 import { withRouter, Link, Redirect } from 'react-router-dom'
 import { connect } from 'unistore/react'
-import { actions, store } from '../store'
+import { actions, store } from '../../store'
 
 class SignIn extends React.Component {
   /** 
@@ -42,7 +42,7 @@ class SignIn extends React.Component {
       return <Redirect to={{ pathname: `/homepage/${this.props.token}` }} />
     }
     return (
-      <div className="wrapper fadeInDown">
+      <div className="wrapper fadeInDown" data-test='login-test'>
         <div id="formContent">
             <div className="fadeIn first">
 							<div className='padding-brand'>

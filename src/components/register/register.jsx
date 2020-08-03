@@ -1,10 +1,10 @@
 import React from 'react';
-import '../styles/css/index.css';
-import '../styles/css/main.css';
-import '../styles/css/bootstrap.min.css'
+import '../../styles/css/index.css';
+import '../../styles/css/main.css'
+import '../../styles/css/bootstrap.min.css';
 import { withRouter, Link, Redirect } from 'react-router-dom'
 import { connect } from 'unistore/react'
-import { actions, store } from '../store'
+import { actions, store } from '../../store'
 
 class SignUp extends React.Component {
   /** 
