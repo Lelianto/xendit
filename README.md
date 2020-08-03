@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Website Notes
+
+### Click Download
+
+You can download all subscribers who have sent e-mails through the newsletter column.
+
+### Firebase Realtime Database
+
+In this website, users can register, log in, with a database using realtime-database firebase. Users can do likes that will be stored in the database.
+
 ## Available Scripts
 
 In the project directory, you can run:
