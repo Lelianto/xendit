@@ -2,6 +2,7 @@ import createStore from 'unistore';
 import axios from 'axios';
 import swal from 'sweetalert';
 import firebaseDb from './firebase';
+import xlsx from 'json-as-xlsx';
 
 const initialState = { 
 	endpoint: 'https://cors-anywhere.herokuapp.com/http://universities.hipolabs.com',
@@ -17,12 +18,36 @@ const initialState = {
 	count:0,
 	userData: {},
 	successRegitration: false,
-	loading: true
+	loading: true,
+	emailList: {}
 }
 
 export const store = createStore(initialState)
 
 export const actions = store => ({
+	downloadSubs: async (state) => {
+		firebaseDb.child('email_list').on('value', snapshot=>{
+			if(snapshot.val()!==null) {
+				let result = snapshot.val()
+				let emailList = []
+				Object.keys(result).map((id)=>{
+					emailList.push({email: result[id].email})
+					return id
+				})
+				console.log('email', emailList)
+				const columns = [
+					{ label: 'Email', value: 'email' }
+				]
+				const content = emailList
+				const settings = {
+					sheetName: 'Subscribers',
+					fileName: 'Users',
+					extraLength: 3
+				}
+				xlsx(columns, content, settings)
+			}
+		})
+	},
 	checkUserData: async (state, lengthData, dataId) => {
 		let userId = dataId
 		if (lengthData===0) {
@@ -147,10 +172,10 @@ export const actions = store => ({
 		const password= state.password    
 		const email = state.email
 		if ( email === '' ) {
-			swal("Gagal", "Email tidak boleh kosong...", "error");
+			swal("Failed", "Email cannot be empty...", "error");
 			return 0
 		} else if ( password === '' ) {
-			swal("Gagal", "Password tidak boleh kosong...", "error");
+			swal("Failed", "Password cannot be empty...", "error");
 			return 0
 		} else {
 			firebaseDb.child('users').on('value', snapshot=>{
@@ -164,7 +189,7 @@ export const actions = store => ({
 						if(email===result[id].email&&password===result[id].password) {
 							wrongData = false
 							if (store.getState().token==='') {
-								swal("Selamat!", "Anda berhasil login!", "success");
+								swal("Congrats!", "You have successfully logged in!", "success");
 							}
 							store.setState({
 								token: id,
@@ -175,7 +200,7 @@ export const actions = store => ({
 						return id
 					})
 					if (wrongData) {
-						swal("Gagal", "Silakan cek kembali email dan password Anda", "error");
+						swal("Failed", "Silakan cek kembali email dan password Anda", "error");
 					}
 				}
 			})
@@ -190,9 +215,9 @@ export const actions = store => ({
 			obj,
 			err => {
 				if(err) {
-					swal("Gagal", "Terjadi kesalahan, muat ulang browser Anda", "error");
+					swal("Failed", "An error occurred, reload your browser", "error");
 				} else {
-					swal("Selamat!", "Anda berhasil berlangganan!", "success");
+					swal("Congrats!", "Anda berhasil berlangganan!", "success");
 				}
 			}
 		)
@@ -262,9 +287,9 @@ export const actions = store => ({
 		let notInDatabase = true
 		let hasChecked = false
 		if ( email === '' ) {
-			swal("Gagal", "Email tidak boleh kosong...", "error");
+			swal("Failed", "Email cannot be empty...", "error");
 		} else if ( password === '' ) {
-			swal("Gagal", "Password tidak boleh kosong...", "error");
+			swal("Failed", "Password cannot be empty...", "error");
 		} else {
 			let obj = {
 				email: email,
@@ -280,7 +305,7 @@ export const actions = store => ({
 					Object.keys(result).map((id)=>{
 						if(email===result[id].email&&notInDatabase&&store.getState().count===0) {
 							notInDatabase=false
-							swal("Gagal", "Email ini telah terdaftar", "error");
+							swal("Failed", "This email has been registered", "error");
 						}
 						hasChecked = true
 						return id
@@ -293,9 +318,9 @@ export const actions = store => ({
 							obj,
 							err => {
 								if(err) {
-									swal("Gagal", "Terjadi kesalahan, muat ulang browser Anda", "error");
+									swal("Failed", "An error occurred, reload your browser", "error");
 								} else {
-									swal("Selamat!", "Anda berhasil terdaftar!", "success");
+									swal("Congrats!", "You have successfully registered!", "success");
 									store.setState({
 										successRegitration: true
 									})
@@ -308,9 +333,9 @@ export const actions = store => ({
 						obj,
 						err => {
 							if(err) {
-								swal("Gagal", "Terjadi kesalahan, muat ulang browser Anda", "error");
+								swal("Failed", "An error occurred, reload your browser", "error");
 							} else {
-								swal("Selamat!", "Anda berhasil terdaftar!", "success");
+								swal("Congrats!", "Anda berhasil terdaftar!", "success");
 								store.setState({
 									successRegitration: true
 								})

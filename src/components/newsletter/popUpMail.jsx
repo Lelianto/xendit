@@ -47,6 +47,9 @@ class Upperheader extends Component {
 		})
 		this.props.postMail(this.state.email)
 	}
+	downloadSubscriber = () => {
+		this.props.downloadSubs()
+	}
 
 	render() {
 		if(this.state.scrolled) {
@@ -75,6 +78,13 @@ class Upperheader extends Component {
 									<div className='col-lg-3 col-md-12 col-sm-12 mtop-5'>
 										<span onClick={()=>this.sendMail()} className='box-email' style={{backgroundColor:'rgb(255, 128, 0)'}}>
 											Count me In!
+										</span>
+									</div>
+									<div className='col-lg-9 col-md-12 col-sm-12'>
+									</div>
+									<div className='col-lg-3 col-md-12 col-sm-12 mtop-5'>
+										<span onClick={()=>this.downloadSubscriber()} className='box-email' style={{backgroundColor:'rgb(255, 128, 0)'}}>
+											Download
 										</span>
 									</div>
 								</div>
